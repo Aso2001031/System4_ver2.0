@@ -22,5 +22,6 @@
      mail
      pass
    }
+}
    @enduml
    ```
