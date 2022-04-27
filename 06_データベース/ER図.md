@@ -13,14 +13,29 @@
  !define TRANSACTION_MARK_COLOR DeepSkyBlue
 
  package "さんぽ" as target_system {
-   entity "会員情報" as member <member> <<M,MASTER_MARK_COLOR>> {
-     + user_id [PK]
+   entity "会員テーブル" as member <member> <<M,MASTER_MARK_COLOR>> {
+     + member_id [PK]
      --
-     name
-     address
-     tel
-     mail
-     pass
+     member_name
+     member_pass
+     member_mail
+     group_id [FK]
+   }
+   entity "投稿テーブル"　as post <post> <<M,MASTER_MARK_COLOR>> {
+    + post_id [PK]
+    --
+    post_name
+    image_file
+    date
+    coordinate_x
+    coordinate_y
+    comment
+    member_id [FK]
+   }
+   entity "グループテーブル" as group <group> <<M,MASTER_MARK_COLOR>> {
+    + group_id [PK]
+    --
+    group_pass
    }
 }
 @enduml
