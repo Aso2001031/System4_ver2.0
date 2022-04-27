@@ -38,5 +38,10 @@
     group_pass
    }
 }
+
+member ||--|{ post
+member ||--|| group
+
+
 @enduml
 ```
