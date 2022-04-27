@@ -21,7 +21,7 @@
      member_mail
      group_id [FK]
    }
-   entity "投稿テーブル"　as post <post> <<M,MASTER_MARK_COLOR>> {
+   entity "投稿テーブル" as post <post> <<M,MASTER_MARK_COLOR>> {
     + post_id [PK]
     --
     post_name
