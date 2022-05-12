@@ -36,7 +36,7 @@
     + group_id [PK]
     --
     group_pass
-    group_number[FK]
+    group_number
    }
 }
 
