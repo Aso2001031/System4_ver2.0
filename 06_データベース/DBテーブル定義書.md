@@ -34,4 +34,4 @@
  |グループパスワード|group_pass|varchar(15)||○||
  |グループ名|group_name|varchar(10)||○||
  |イメージ|group_image|mediumblob||○||
- |ルーム|group_room|varchar(8)||○|○|
+ |ルーム|group_room|varchar(8)||○||
