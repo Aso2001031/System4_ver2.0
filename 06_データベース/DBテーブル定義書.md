@@ -12,6 +12,7 @@
  |会員名|membeer_name|varcahr(20)||○||
  |会員パスワード|member_pass|varchar(15)||○||
  |メールアドレス|mamber_mail|varchar(50)||○||
+ |ユーザーアイコン|member_icon|mediumblob||||
  |グループID|group_id|int(10)|||○|
  
  ### 投稿テーブル (post)
@@ -31,3 +32,6 @@
  |:---|:---|:---|:---|:---:|:----:|
  |グループID|group_id|int(10)|○|○||
  |グループパスワード|group_pass|varchar(15)||○||
+ |グループ名|group_name|varchar(10)||○||
+ |イメージ|group_image|mediumblob||○||
+ |ルーム|group_room|varchar(8)||○|○|
