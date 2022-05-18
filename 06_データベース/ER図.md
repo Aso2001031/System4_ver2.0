@@ -19,6 +19,7 @@
      member_name
      member_pass
      member_mail
+     member_icon
      group_number [FK]
    }
    entity "投稿テーブル" as post <post> <<M,MASTER_MARK_COLOR>> {
@@ -37,6 +38,9 @@
     --
     group_pass
     group_number
+    group_name
+    group_image
+    group_room
    }
 }
 
