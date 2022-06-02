@@ -1,6 +1,6 @@
 ソースコードのファイルです。
 
-//entry.php (片渕)※ユーザーIcon周りがまだ未完そのほかはほぼ完成
-//check.php (片渕)※同上
-//login.php (片渕)完成
-//thank.php (片渕)＊これはダミーページ
+# entry.php (片渕)※ユーザーIcon周りがまだ未完そのほかはほぼ完成
+# check.php (片渕)※同上
+# login.php (片渕)完成
+# thank.php (片渕)＊これはダミーページ
