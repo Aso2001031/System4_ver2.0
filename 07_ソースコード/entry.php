@@ -121,27 +121,27 @@ if(isset($_POST['name'])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>お散歩</title>
 </head>
 <body>
-    <h1>会員登録</h1>
+    <a class="entry-title">会員登録</a>
+    <div class="entry-form">
+        <form action="entry.php" method="post" enctype="multipart/form-data">
 
-    <form action="entry.php" method="post" enctype="multipart/form-data">
+            <a class="entry-text">お名前</a>
+            <input type="text" name="name" class="entry-box" placeholder="名前を入力してください" ><br>
 
-    <p>お名前</p>
-    <input type="text" name="name" placeholder="名前を入力してください" ><br>
+            <a class="entry-text">メールアドレス</a>
+            <input type="text" name="mail" class="entry-box" placeholder="メールアドレスを入力してください" ><br>
 
-    <p>メールアドレス</p>
-    <input type="text" name="mail" placeholder="メールアドレスを入力してください" ><br>
+            <a class="entry-text">パスワード</a>
+            <input type="password" name="pass" class="entry-box" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
 
-    <p>パスワード</p>
-    <input type="password" name="pass" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
+            <a class="entry-text">ユーザーアイコン(任意)</a>
+            <input type="file" name="img" class="entry-file">
 
-    <p>ユーザーアイコン(任意)</p>
-    <input type="file" name="img">
-
-    <button type="submit">確定</button>
-    </form>
+            <button type="submit" class="entry-button">確定</button>
+        </form>
     </div>
 
 </body>

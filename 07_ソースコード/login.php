@@ -38,7 +38,7 @@ if(isset($_POST["login"])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ログイン</title>
+    <title>お散歩</title>
 </head>
 <body>
 
@@ -67,7 +67,7 @@ if(isset($_POST["login"])){
         <button type="submit" name="login" class="login_button">ログイン</button><br>
     </form>
     
-    <a href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
+    <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
 </div>
 </body>
 </html>
