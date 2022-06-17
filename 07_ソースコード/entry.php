@@ -18,7 +18,7 @@ if(isset($_POST['name'])){
             
             //（4）$_FILESから保存先を取得して、images_after（ローカルフォルダ）に移す
             //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
-            $uploaded_path = 'img/'.$filename;
+            $uploaded_path = 'user_img/'.$filename;
             //echo $uploaded_path.'<br>';
             
             $result = move_uploaded_file($_FILES['img']['tmp_name'],$uploaded_path);
