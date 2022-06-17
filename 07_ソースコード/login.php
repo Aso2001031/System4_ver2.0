@@ -64,8 +64,10 @@ if(isset($_POST["login"])){
         <input type="password" name="pass" class="log_box"><br>
 
 
-        <button type="submit" name="login" class="login_button">ログイン</button>
+        <button type="submit" name="login" class="login_button">ログイン</button><br>
     </form>
+    
+    <a href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
 </div>
 </body>
 </html>

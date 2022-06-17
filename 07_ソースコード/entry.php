@@ -18,7 +18,7 @@ if(isset($_POST['name'])){
             
             //（4）$_FILESから保存先を取得して、images_after（ローカルフォルダ）に移す
             //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
-            $uploaded_path = './System4_Ver2.0/img/'.$filename;
+            $uploaded_path = 'img/'.$filename;
             //echo $uploaded_path.'<br>';
             
             $result = move_uploaded_file($_FILES['img']['tmp_name'],$uploaded_path);
@@ -59,17 +59,16 @@ if(isset($_POST['name'])){
 
                     $dbh = null;
 
-                    
+                    header("location:http://aso2001007.versus.jp/System4_Ver2.0/thank.php");
+                    exit();
                 
                 }            
             }else{
-                //$MSG = 'アップロード失敗！エラーコード：'.$_FILES['upload_image']['error'];
+                $MSG = 'アップロード失敗！エラーコード：'.$_FILES['img']['error'];
             }
-            header("location:http://aso2001007.versus.jp/System4_Ver2.0/thank.php");
-            exit();
-
+            
         }else{
-            $img=(!empty($_FILES['img']['tmp_file']))?get_file_contents($_FILES['img']['tmp_file']):NULL;
+            //$img=(!empty($_FILES['img']['tmp_file']))?get_file_contents($_FILES['img']['tmp_file']):NULL;
         
             
             $dsn = "mysql:host=mysql203.phy.lolipop.lan;dbname=LAA1290633-system4ver2;charset=utf8";
@@ -109,9 +108,11 @@ if(isset($_POST['name'])){
                 exit();
             }
         }
+        
 
     }
 }
+
 
 
 ?>
