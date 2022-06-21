@@ -89,10 +89,9 @@ if (isset($_POST["edit"])){
         echo '<input type="password" name="pass" class="edit-box" value="',$password,'">';
         ?>
         <a class="edit-text">ユーザーアイコン：</a>
-        <!-- 画像を表示している箇所 -->
-        <?php if(!empty($icon)){;?>
-        <img src="<?php echo $icon;?>" alt="">
-        <?php } ;?>
+        <?php
+        echo '<img src="',$icon,'" alt="">';
+        ?>
         <input type="file" name="icon" class="edit-box">
 
         <button type="submit" name="edit" class="edit-button">完了</button>

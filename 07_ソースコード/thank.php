@@ -1,3 +1,8 @@
+<?php session_start(); ?>
+<?php
+$icon = '';
+$icon = $_SESSION['member']['icon'];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,11 +10,14 @@
     </head>
     <body>
         <p>成功しています！</p>
-
-        <?php if(!empty($img_path)){;?>
-        <img src="<?php echo $img_path;?>" alt="">
-        <?php } ;?>
+    
+        <?php
+        echo '<img src="',$icon,'" alt="">';
+        ?>
 
         <a href="menu.php">メニューに戻る</a>
     </body>
 </html>
+
+
+
