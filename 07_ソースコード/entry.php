@@ -3,6 +3,8 @@
 if(isset($_POST['name'])){
     //入力欄に情報が入っているかどうか
     if(empty($_POST['name']) === true or empty($_POST['mail']) === true or empty($_POST['pass'])){
+       // $alert = "<script type='text/javascript'>alert('正しく入力してください');</script>";
+        //echo $alert;
         print "正しい情報を入力して下さい。<br><br>";
     }else{
         //入っていれば登録に進む
@@ -15,7 +17,7 @@ if(isset($_POST['name'])){
  
             //（3）$_FILESからファイル名を取得する
             $filename = $_FILES['img']['name'];
-            
+            ;
             //（4）$_FILESから保存先を取得して、images_after（ローカルフォルダ）に移す
             //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
             $uploaded_path = 'user_img/'.$filename;
@@ -44,7 +46,10 @@ if(isset($_POST['name'])){
                 
                 if(!empty($rec) === true) {
                     print "<br>";
+                    //$alert = "<script type='text/javascript'>alert('すでに使われているメールです');</script>";
+                    //echo $alert;
                     print "すでに使われているメールです。<br><br>";
+                               
                 } else {
 
                     //使われていなければ登録
@@ -116,31 +121,31 @@ if(isset($_POST['name'])){
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>お散歩</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <a class="entry-title">会員登録</a>
+    <a class="entry-title">新規登録</a>
     <div class="entry-form">
         <form action="entry.php" method="post" enctype="multipart/form-data">
 
-            <a class="entry-text">お名前</a>
+            <a class="entry-text">ユーザー名</a><br>
             <input type="text" name="name" class="entry-box" placeholder="名前を入力してください" ><br>
 
-            <a class="entry-text">メールアドレス</a>
+            <a class="entry-text">メールアドレス</a><br>
             <input type="text" name="mail" class="entry-box" placeholder="メールアドレスを入力してください" ><br>
 
-            <a class="entry-text">パスワード</a>
+            <a class="entry-text">パスワード</a><br>
             <input type="password" name="pass" class="entry-box" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
 
-            <a class="entry-text">ユーザーアイコン(任意)</a>
-            <input type="file" name="img" class="entry-file">
+            <a class="entry-text">ユーザーアイコン(任意)</a><br>
+            <input type="file" name="img" class="entry-file"><br>
 
-            <button type="submit" class="entry-button">確定</button>
+            <button type="submit" class="entry-button">登録</button>
         </form>
     </div>
 
