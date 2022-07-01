@@ -20,7 +20,7 @@ if(isset($_POST["login"])){
         foreach ($sql as $row){
             $_SESSION['member']=[
                 'id'=>$row['member_id'],'mail'=>$row['member_mail'],
-                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
+                'name'=>$row['member_name'],'pass'=>$row['member_pass']];
         }
         if (isset($_SESSION['member'])){
             http_response_code(301);
@@ -39,6 +39,7 @@ if(isset($_POST["login"])){
 <head>
     <meta charset="UTF-8">
     <title>お散歩</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
@@ -50,24 +51,25 @@ if(isset($_POST["login"])){
     <?php
     if(isset($_POST["login"])){
         echo '<div class="error_text">';
-        echo 'メールアドレス又はパスワードが違います。';
+        $alert = "<script type='text/javascript'>alert('メールアドレス又はパスワードが違います。');</script>";
+        echo $alert;
         echo '</div>';
     }else{
         echo "<br>";
     }
     ?>
+    <div class="login-form">
+        <form action="login.php" method="post" >
+            <a class="log_text">メールアドレス</a><br>
+            <input type="text" name="mail"class="log_box"><br>
+            <a class="log_text">パスワード</a><br>
+            <input type="password" name="pass" class="log_box"><br>
 
-    <form action="login.php" method="post">
-        <a class="log_text">メールアドレス</a><br>
-        <input type="text" name="mail"class="log_box"><br>
-        <a class="log_text">パスワード</a><br>
-        <input type="password" name="pass" class="log_box"><br>
 
-
-        <button type="submit" name="login" class="login_button">ログイン</button><br>
-    </form>
-    
-    <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
+            <button type="submit" name="login" class="login_button">ログイン</button><br>
+            <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
+        </form>
+    </div>
 </div>
 </body>
 </html>
