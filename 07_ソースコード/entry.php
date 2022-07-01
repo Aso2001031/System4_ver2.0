@@ -64,7 +64,8 @@ if(isset($_POST['name'])){
                     exit();
                 
                 }
-                
+
+            }else{
                 $dsn = "mysql:host=mysql203.phy.lolipop.lan;dbname=LAA1290633-system4ver2;charset=utf8";
                 $user = "LAA1290633";
                 $password = "System4";
@@ -102,48 +103,9 @@ if(isset($_POST['name'])){
     
                     header("location:http://aso2001007.versus.jp/System4_Ver2.0/login.php");
                     exit();
-                }
-            }           
-        }
-    //$_FILESに何も入っていなかったら下の処理を行う  
-    }
-    $dsn = "mysql:host=mysql203.phy.lolipop.lan;dbname=LAA1290633-system4ver2;charset=utf8";
-    $user = "LAA1290633";
-    $password = "System4";
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-    //既に使われているメールアドレスかどうかを判断
-    $sql = "SELECT * FROM member WHERE member_mail=?";
-    $stmt = $dbh -> prepare($sql);
-    $data[] = $mail;
-    $stmt -> execute($data);
-    $data = array();
-    
-    $rec = $stmt -> fetch(PDO::FETCH_ASSOC);
-            
-            
-            
-    if(!empty($rec) === true) {
-        print "<br>";
-        print "すでに使われているメールです。<br><br>";
-    } else {
-
-        $img= 'user_img/no-image.png';
-        //使われていなければ登録
-        $sql = "INSERT INTO member(member_id, member_name, member_pass, member_mail, member_icon, group_id) VALUES(null,?,?,?,?,1)";
-        $stmt = $dbh -> prepare($sql);
-        //$pass = md5($pass);
-        $data[] = $name;
-        $data[] = $pass;
-        $data[] = $mail;
-        $data[] = $img;
-        $stmt -> execute($data);
-
-        $dbh = null;
-
-        header("location:http://aso2001007.versus.jp/System4_Ver2.0/login.php");
-        exit();
+                }       
+            }   
+        }   
     }
 }
 
@@ -163,17 +125,17 @@ if(isset($_POST['name'])){
     <div class="entry-form">
         <form action="entry.php" method="post" enctype="multipart/form-data">
 
-            <a class="entry-text">お名前</a><br>
+            <a class="entry-text">お名前</a>
             <input type="text" name="name" class="entry-box" placeholder="名前を入力してください" ><br>
 
-            <a class="entry-text">メールアドレス</a><br>
+            <a class="entry-text">メールアドレス</a>
             <input type="text" name="mail" class="entry-box" placeholder="メールアドレスを入力してください" ><br>
 
-            <a class="entry-text">パスワード</a><br>
+            <a class="entry-text">パスワード</a>
             <input type="password" name="pass" class="entry-box" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
 
-            <a class="entry-text">ユーザーアイコン(任意)</a><br>
-            <input type="file" name="img" class="entry-file"><br>
+            <a class="entry-text">ユーザーアイコン(任意)</a>
+            <input type="file" name="img" class="entry-file">
 
             <button type="submit" class="entry-button">確定</button>
         </form>
