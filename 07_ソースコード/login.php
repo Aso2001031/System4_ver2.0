@@ -20,7 +20,7 @@ if(isset($_POST["login"])){
         foreach ($sql as $row){
             $_SESSION['member']=[
                 'id'=>$row['member_id'],'mail'=>$row['member_mail'],
-                'name'=>$row['member_name'],'pass'=>$row['member_pass']];
+                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
         }
         if (isset($_SESSION['member'])){
             http_response_code(301);
