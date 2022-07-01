@@ -3,8 +3,8 @@
 if(isset($_POST['name'])){
     //入力欄に情報が入っているかどうか
     if(empty($_POST['name']) === true or empty($_POST['mail']) === true or empty($_POST['pass'])){
-       // $alert = "<script type='text/javascript'>alert('正しく入力してください');</script>";
-        //echo $alert;
+        $alert = "<script type='text/javascript'>alert('正しく入力してください');</script>";
+        echo $alert;
         print "正しい情報を入力して下さい。<br><br>";
     }else{
         //入っていれば登録に進む
@@ -46,8 +46,8 @@ if(isset($_POST['name'])){
                 
                 if(!empty($rec) === true) {
                     print "<br>";
-                    //$alert = "<script type='text/javascript'>alert('すでに使われているメールです');</script>";
-                    //echo $alert;
+                    $alert = "<script type='text/javascript'>alert('すでに使われているメールです');</script>";
+                    echo $alert;
                     print "すでに使われているメールです。<br><br>";
                                
                 } else {
