@@ -1,48 +1,106 @@
 <?php session_start();
-if (isset($_POST["edit"])){
-    /*DB接続*/
-    $pdo = new PDO('mysql:host=mysql203.phy.lolipop.lan;
-                  dbname=LAA1290633-system4ver2; charset=utf8',
-        'LAA1290633',
-        'System4');
+if(isset($_POST['edit'])){
+    if (empty($_POST['simei']) === true or empty($_POST['mail']) === true or empty($_POST['pass'])){
+        echo '正しい情報を入れてください！';
+    }else{
+
+        $id='';
+        $id=$_SESSION['member']['id'];
+
+        $name=$_POST['simei'];
+        $mail=$_POST['mail'];
+        $password=$_POST['pass'];
 
 
-    $mail=$_POST['mail'];
-    $password=$_POST['pass'];
-
-
-    /*メールアドレスの正規表現*/
+        /*メールアドレスの正規表現*/
         if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z]+\.)+[0-9a-z-]+$|',$mail)){
             /*パスワードの正規表現*/
             if (preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,24}/',$password)){
 
-                if (isset($_SESSION['member'])) {
-                    $id=$_SESSION['member']['member_id'];
-                    $sql=$pdo->prepare('SELECT * FROM member WHERE member_id=?');
-                    $sql->execute([$id]);
-                }
 
-                if (isset($_SESSION['member'])) {
-                    $sql=$pdo->prepare('UPDATE member SET member_name=?,member_mail=?,member_pass=?, member_icon=? WHERE member_id=?');
-                    $sql->execute([
-                        $_REQUEST['name'],$_REQUEST['mail'],$_REQUEST['password'],$_REQUEST['icon'],$id]);
+                if(!empty($_FILES['icon'])){
 
-                    /*sessionに再登録*/
-                    $_SESSION['member']=[
-                        'member_id'=>$id,'member_name'=>$_REQUEST['name'],
-                        'member_mail'=>$_REQUEST['mail'],'member_pass'=>$_REQUEST['password'],
-                        'member_icon'=>$_REQUEST['icon']];
+                    $filename = $_FILES['icon']['name'];
+    
+                    $uploaded_path = 'user_img/'.$filename;
 
-                    if (isset($_SESSION['member'])){
-                        http_response_code(301);
+                    $result = move_uploaded_file($_FILES['icon']['tmp_name'],$uploaded_path);
 
+                    if($result){
+                        $img_path = $uploaded_path;
+
+                        try{
+                            /*DB接続*/
+                            $pdo = new PDO('mysql:host=mysql203.phy.lolipop.lan;
+                            dbname=LAA1290633-system4ver2; charset=utf8',
+                            'LAA1290633',
+                            'System4');
+
+                            $stmt = 'UPDATE member SET member_name=:member_name,member_mail=:member_mail,member_pass=:member_pass,member_icon=:member_icon WHERE member_id=:member_id';
+                            $stmt = $pdo -> prepare($stmt);
+                            $stmt->bindParam(':member_name', $_POST['simei'], PDO::PARAM_STR);
+                            $stmt->bindParam(':member_mail', $_POST['mail'], PDO::PARAM_STR);
+                            $stmt->bindParam(':member_pass', $_POST['pass'], PDO::PARAM_STR);
+                            $stmt->bindParam(':member_icon', $img_path, PDO::PARAM_STR);
+                            $stmt->bindParam(':member_id', $id, PDO::PARAM_INT);
+                            $stmt->execute();
+                            
+                            
+
+                            $dbh = null;
+                            
+                        }catch(PDOException $e){
+                            
+                            
+                        
+                        }
+                        
+
+                        foreach ($stmt as $row){
+                            $_SESSION['member']=[
+                                'id'=>$row['member_id'],'mail'=>$row['member_mail'],
+                                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
+                            }
+                
+                        header("location:http://aso2001007.versus.jp/System4_Ver2.0/edit.php");
+                        exit();
+
+                    }else{
+                        /*DB接続*/
+                        $pdo = new PDO('mysql:host=mysql203.phy.lolipop.lan;
+                        dbname=LAA1290633-system4ver2; charset=utf8',
+                        'LAA1290633',
+                        'System4');
+                                    
+                        $sql=$pdo->prepare('UPDATE member SET member_name=?,member_mail=?,member_pass=?  WHERE member_id=?');
+                        $sql->execute([
+                            $_REQUEST['simei'],$_REQUEST['mail'],$_REQUEST['pass'],$id]);
+        
+                        $sql=$pdo->prepare('select * from member where member_mail=? and member_pass=?');
+                            $sql->execute([$_REQUEST['mail'],$_REQUEST['pass']]);    
+        
+                        /*sessionに再登録*/
+                        foreach ($sql as $row){
+                            $_SESSION['member']=[
+                                'id'=>$row['member_id'],'mail'=>$row['member_mail'],
+                                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
+                            }
                         header("location:http://aso2001007.versus.jp/System4_Ver2.0/edit.php");
                         exit;
+                    
                     }
+    
+                               
                 }
+            }else{
+                echo 'パスワードは八文字以上二十四文字以内でお願いします！';   
             }
+        }else{
+            echo 'メールアドレスが不正です';
         }
     }
+}
+
 
 ?>
 <!--会員情報編集ページ-->
@@ -56,7 +114,7 @@ if (isset($_POST["edit"])){
 <!--sessionで会員情報を取得-->
 <?php
 $id=$name=$mail=$password=$icon='';
-if (isset($_SESSION['member'])) {
+if (!empty($_SESSION['member'])) {
     $id=$_SESSION['member']['id'];
     $name=$_SESSION['member']['name'];
     $mail=$_SESSION['member']['mail'];
@@ -73,25 +131,28 @@ if (isset($_POST["edit"])){
     echo '<a class="cant_edit">会員情報を更新出来ませんでした</a>';
 }
 ?>
+
 <div class="edit">
-    <form action="edit.php" method="post">
+    <form action="edit.php" method="post" enctype="multipart/form-data">
         
-        <a class="edit-text">お名前：</a>
+        <a class="edit-text">お名前：</a><br>
         <?php
-        echo '<input type="text" name="name" class="edit-box" value="',$name,'">';
+        echo '<input type="text" name="simei" class="edit-box" value="',$name,'">';
         ?>
-        <a class="edit-text">メールアドレス：</a>
+        <a class="edit-text">メールアドレス：</a><br>
         <?php
         echo '<input type="text" name="mail" class="edit-box" value="',$mail,'">';
         ?>
-        <a class="edit-text">パスワード：</a>
+        <a class="edit-text">パスワード：</a><br>
         <?php
         echo '<input type="password" name="pass" class="edit-box" value="',$password,'">';
         ?>
-        <a class="edit-text">ユーザーアイコン：</a>
+        <a class="edit-text">ユーザーアイコン：</a><br>
+        <div class=edit-img>
         <?php
         echo '<img src="',$icon,'" alt="">';
         ?>
+        </div>
         <input type="file" name="icon" class="edit-box">
 
         <button type="submit" name="edit" class="edit-button">完了</button>
