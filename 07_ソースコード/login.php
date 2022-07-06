@@ -59,7 +59,7 @@ if(isset($_POST["login"])){
     }
     ?>
     <div class="login-form">
-        <form action="login.php" method="post" >
+        <form action="login.php" method="post">
             <a class="log_text">メールアドレス</a><br>
             <input type="text" name="mail"class="log_box"><br>
             <a class="log_text">パスワード</a><br>
@@ -67,8 +67,9 @@ if(isset($_POST["login"])){
 
 
             <button type="submit" name="login" class="login_button">ログイン</button><br>
-            <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
         </form>
+        
+        <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
     </div>
 </div>
 </body>
