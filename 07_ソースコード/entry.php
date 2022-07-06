@@ -140,6 +140,8 @@ if(isset($_POST['name'])){
             <button type="submit" class="entry-button">確定</button>
         </form>
     </div>
-
+    <?php
+    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩︎</a>';
+    ?>
 </body>
 </html>

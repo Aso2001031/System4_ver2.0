@@ -147,6 +147,9 @@ if (isset($_POST["edit"])){
         <button type="submit" name="edit" class="edit-button">完了</button>
     </form>
     <a href="http://aso2001007.versus.jp/System4_Ver2.0/menu.php">メニューへ</a>
+    <?php
+    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
+    ?>
 </div>
 
 </body>
