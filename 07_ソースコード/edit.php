@@ -29,7 +29,7 @@ if(isset($_POST['edit'])){
                     if($result){
                         $img_path = $uploaded_path;
 
-                        try{
+                        
                             /*DB接続*/
                             $pdo = new PDO('mysql:host=mysql203.phy.lolipop.lan;
                             dbname=LAA1290633-system4ver2; charset=utf8',
@@ -45,22 +45,11 @@ if(isset($_POST['edit'])){
                             $stmt->bindParam(':member_id', $id, PDO::PARAM_INT);
                             $stmt->execute();
                             
-                            
-
-                            $dbh = null;
-                            
-                        }catch(PDOException $e){
-                            
-                            
-                        
-                        }
-                        
-
-                        foreach ($stmt as $row){
                             $_SESSION['member']=[
-                                'id'=>$row['member_id'],'mail'=>$row['member_mail'],
-                                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
-                            }
+                                'id'=>$id,
+                                'mail'=>$_POST['mail'],'name'=>$_POST['simei'],
+                                'pass'=>$_POST['pass'],'icon'=>$img_path];
+                            
                 
                         header("location:http://aso2001007.versus.jp/System4_Ver2.0/edit.php");
                         exit();
