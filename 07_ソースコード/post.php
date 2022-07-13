@@ -73,11 +73,10 @@ EOF;
     <div class="post_area">
     <form action="post.php" method="post" enctype="multipart/form-data">
         <input required type="text" class="post_name" name="post_name" placeholder="タイトル"><br>
-        <a class="image-txt">写真を選択</a><br>
         <div>
             <label>
                 <span class="file_label">
-                    選択
+                    写真を選択
                 </span>
                 <input required type="file" class="image_file" name="image_file" onchange="previewImage(this);">
             </label>
@@ -93,14 +92,13 @@ EOF;
                 fileReader.readAsDataURL(obj.files[0]);
             }
         </script>
-        <a class="post_text">現在地</a><br>
-        <input type="text" name="address" id="address" value=""> <!--場所-->
         <button type="button" id="get-gps">現在地名取得</button><br>
+        <input type="text" name="address" id="address" value="" > <!--場所-->
         <input type="hidden" name="lat" id="lat" value=""><!-- 緯度 -->
-        <input type="hidden" name="lon" id="lon" value=""><!-- 経度 -->
+        <input type="hidden" name="lon" id="lon" value=""><br><!-- 経度 -->
 
         <input type="text" class="comment" name="comment" placeholder="コメント" style="width: 300px;height: 200px;"><br>
-        <button type="submit" class="post" name="post">投稿する</button>
+        <button type="submit" class="post" name="post">投稿</button>
     </form>
     </div>
 </body>
