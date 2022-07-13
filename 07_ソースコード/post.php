@@ -28,8 +28,8 @@ $group_id = $_SESSION['member']['group_id']
 
                 if (!empty($_POST['post_name'] && $_POST['comment'])) {
 
-                    $sql = 'INSERT INTO post(post_id,post_name,member_id,image_file,comment,date,coordinate_X,coordinate_Y,post_address) 
-                                      VALUES(null,?,?,?,?,?,?,?,?)';
+                    $sql = 'INSERT INTO post(post_id,post_name,member_id,group_id,image_file,comment,date,coordinate_X,coordinate_Y,post_address) 
+                                      VALUES(null,?,?,?,?,?,?,?,?,?)';
                     $stmt = $dbh->prepare($sql);
 
                     $data[] = $_POST['post_name'];
