@@ -29,7 +29,7 @@ if(isset($_POST['edit'])){
                     if($result){
                         $img_path = $uploaded_path;
 
-                        
+                        try{
                             /*DB接続*/
                             $pdo = new PDO('mysql:host=mysql203.phy.lolipop.lan;
                             dbname=LAA1290633-system4ver2; charset=utf8',
@@ -45,11 +45,22 @@ if(isset($_POST['edit'])){
                             $stmt->bindParam(':member_id', $id, PDO::PARAM_INT);
                             $stmt->execute();
                             
-                            $_SESSION['member']=[
-                                'id'=>$id,
-                                'mail'=>$_POST['mail'],'name'=>$_POST['simei'],
-                                'pass'=>$_POST['pass'],'icon'=>$img_path];
                             
+
+                            $dbh = null;
+                            
+                        }catch(PDOException $e){
+                            
+                            
+                        
+                        }
+                        
+
+                        foreach ($stmt as $row){
+                            $_SESSION['member']=[
+                                'id'=>$row['member_id'],'mail'=>$row['member_mail'],
+                                'name'=>$row['member_name'],'pass'=>$row['member_pass'],'icon'=>$row['member_icon']];
+                            }
                 
                         header("location:http://aso2001007.versus.jp/System4_Ver2.0/edit.php");
                         exit();
@@ -98,8 +109,15 @@ if(isset($_POST['edit'])){
 <head>
     <meta charset="UTF-8">
     <title>お散歩</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+     <!-- バナー表示 -->
+    <div class="header">
+        <a class="banner_title">お散歩</a>
+        <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+    </div>
+    <!-- バナーココまで -->
 <!--sessionで会員情報を取得-->
 <?php
 $id=$name=$mail=$password=$icon='';
@@ -113,7 +131,7 @@ if (!empty($_SESSION['member'])) {
 ?>
 
 <!-- 会員情報 -->
-<a class="edit_title">会員情報</a>
+<a class="title">会員情報</a>
 
 <?php
 if (isset($_POST["edit"])){
@@ -121,36 +139,36 @@ if (isset($_POST["edit"])){
 }
 ?>
 
-<div class="edit">
+<div class="form">
     <form action="edit.php" method="post" enctype="multipart/form-data">
         
-        <a class="edit-text">お名前：</a><br>
+        <a class="text">お名前</a><br/>
         <?php
-        echo '<input type="text" name="simei" class="edit-box" value="',$name,'">';
-        ?>
-        <a class="edit-text">メールアドレス：</a><br>
+        echo '<input type="text" name="simei" class="textbox" value="',$name,'">';
+        ?><br>
+        <a class="text">メールアドレス</a><br/>
         <?php
-        echo '<input type="text" name="mail" class="edit-box" value="',$mail,'">';
-        ?>
-        <a class="edit-text">パスワード：</a><br>
+        echo '<input type="text" name="mail" class="textbox" value="',$mail,'">';
+        ?><br>
+        <a class="text">パスワード</a><br/>
         <?php
-        echo '<input type="password" name="pass" class="edit-box" value="',$password,'">';
-        ?>
-        <a class="edit-text">ユーザーアイコン：</a><br>
-        <div class=edit-img>
+        echo '<input type="password" name="pass" class="textbox" value="',$password,'">';
+        ?><br>
+        <a class="edit-text">ユーザーアイコン</a><br/>
+        <div class="outside">
+        <div class="inside">    
         <?php
         echo '<img src="',$icon,'" alt="">';
-        ?>
+        ?><br>
+        </div>
         </div>
         <input type="file" name="icon" class="edit-box">
 
-        <button type="submit" name="edit" class="edit-button">完了</button>
+        <button type="submit" name="edit" class="button">完了</button>
     </form>
     <a href="http://aso2001007.versus.jp/System4_Ver2.0/menu.php">メニューへ</a>
-    <?php
-    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
-    ?>
 </div>
+
 
 </body>
 </html>
