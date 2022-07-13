@@ -20,9 +20,9 @@ $group_id = $_SESSION['member']['group_id']
 
             if ($result) {
                 $img_path = $uploaded_path;
-                $dsn = "mysql:host=mysql205.phy.lolipop.lan;dbname=LAA1290624-system4ver2;charset=utf8";
-                $user = "LAA1290624";
-                $password = "System4";
+                $dsn = "mysql:host=mysql205.phy.lolipop.lan;dbname=LAA1290579-system4ver2;charset=utf8";
+                $user = "LAA1290579";
+                $password = "IZUken0626";
                 $dbh = new PDO($dsn, $user, $password);
                 $dbh -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -47,7 +47,7 @@ $group_id = $_SESSION['member']['group_id']
 
                     echo <<<EOF
                 <script>//リダイレクト
-                //location.href='map.php';
+                location.href='map.php';
                 </script>
 EOF;
 
@@ -72,7 +72,7 @@ EOF;
     <button type="submit" class="return" onclick="history.back()">←</button>
     <div class="post_area">
     <form action="post.php" method="post" enctype="multipart/form-data">
-        <input required type="text" class="post_name" name="post_name" placeholder="タイトル" value="text"><br>
+        <input required type="text" class="post_name" name="post_name" placeholder="タイトル"><br>
         <a class="image-txt">写真を選択</a><br>
         <div>
             <label>
@@ -99,7 +99,7 @@ EOF;
         <input type="hidden" name="lat" id="lat" value=""><!-- 緯度 -->
         <input type="hidden" name="lon" id="lon" value=""><!-- 経度 -->
 
-        <input type="text" class="comment" name="comment" placeholder="コメント" style="width: 300px;height: 200px;" value="comment"><br>
+        <input type="text" class="comment" name="comment" placeholder="コメント" style="width: 300px;height: 200px;"><br>
         <button type="submit" class="post" name="post">投稿する</button>
     </form>
     </div>
