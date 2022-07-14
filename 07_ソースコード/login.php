@@ -42,11 +42,17 @@ if(isset($_POST["login"])){
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- バナー表示 -->
+    <div class="header">
+        <a class="banner_title">お散歩</a>
+        <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+    </div>
+    <!-- バナーココまで -->
 
 <div class="login">
 
 
-    <a class="title">ログイン</a><br>
+    <a class="login_title">ログイン</a><br>
 
     <?php
     if(isset($_POST["login"])){
@@ -58,17 +64,18 @@ if(isset($_POST["login"])){
         echo "<br>";
     }
     ?>
-    <div class="form">
-        <form action="login.php" method="post" >
-            <a class="text">メールアドレス</a><br>
-            <input type="text" name="mail"class="textbox"><br>
-            <a class="text">パスワード</a><br>
-            <input type="password" name="pass" class="textbox"><br>
+    <div class="login-form">
+        <form action="login.php" method="post">
+            <a class="log_text">メールアドレス</a><br>
+            <input type="text" name="mail"class="log_box"><br>
+            <a class="log_text">パスワード</a><br>
+            <input type="password" name="pass" class="log_box"><br>
 
 
-            <button type="submit" name="login" class="button">ログイン</button><br>
-            <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
+            <button type="submit" name="login" class="login_button">ログイン</button><br>
         </form>
+        
+        <a class="login-url" href="http://aso2001007.versus.jp/System4_Ver2.0/entry.php">会員登録の方はこちら</a>
     </div>
 </div>
 </body>

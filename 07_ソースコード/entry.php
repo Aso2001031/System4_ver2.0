@@ -122,31 +122,32 @@ if(isset($_POST['name'])){
 </head>
 <body>
     <!-- バナー表示 -->
-<div class="header">
-    <a class="banner_title">お散歩</a>
-    <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
-</div>
-<!-- バナーココまで -->
-<div a class="center">
-    <a class="title">会員登録</a>
-    <div class="form">
+    <div class="header">
+        <a class="banner_title">お散歩</a>
+        <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+    </div>
+    <!-- バナーココまで -->
+    <a class="entry-title">会員登録</a>
+    <div class="entry-form">
         <form action="entry.php" method="post" enctype="multipart/form-data">
 
-            <a class="text">お名前</a><br>
-            <input type="text" name="name" class="textbox" placeholder="名前を入力してください" ><br>
+            <a class="entry-text">お名前</a>
+            <input type="text" name="name" class="entry-box" placeholder="名前を入力してください" ><br>
 
-            <a class="text">メールアドレス</a><br>
-            <input type="text" name="mail" class="textbox" placeholder="メールアドレスを入力してください" ><br>
+            <a class="entry-text">メールアドレス</a>
+            <input type="text" name="mail" class="entry-box" placeholder="メールアドレスを入力してください" ><br>
 
-            <a class="text">パスワード</a><br>
-            <input type="password" name="pass" class="textbox" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
+            <a class="entry-text">パスワード</a>
+            <input type="password" name="pass" class="entry-box" placeholder="英大文字,小文字,数字が1文字以上含まれてる8文字以上24文字以下"><br>
 
-            <a class="text">ユーザーアイコン(任意)</a><br>
+            <a class="entry-text">ユーザーアイコン(任意)</a>
             <input type="file" name="img" class="entry-file">
 
-            <button type="submit" class="button">確定</button>
+            <button type="submit" class="entry-button">確定</button>
         </form>
     </div>
-</div>
+    <?php
+    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩︎</a>';
+    ?>
 </body>
 </html>

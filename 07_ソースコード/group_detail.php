@@ -2,9 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="./css/style.css">
         <title>投稿詳細</title>
     </head>
     <body>
+        <!-- バナー表示 -->
+        <div class="header">
+            <a class="banner_title">お散歩</a>
+            <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+        </div>
+        <!-- バナーココまで -->
         <h1>投稿詳細</h1>
         <div>
             <?php

@@ -10,5 +10,7 @@
         <a href="http://aso2001007.versus.jp/System4_Ver2.0/edit.php">編集画面へ</a>
         <a href="http://aso2001007.versus.jp/System4_Ver2.0/user_post.php">投稿一覧へ</a>
         <a href="http://aso2001007.versus.jp/System4_Ver2.0/group_post.php">グループ投稿一覧へ</a>
+        <a href="http://aso2001007.versus.jp/System4_Ver2.0/group_create.php">グループ作成</a>
+        <a href="http://aso2001007.versus.jp/System4_Ver2.0/group_in.php">グループ作成</a>
     </body>
 </html>

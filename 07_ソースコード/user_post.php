@@ -17,9 +17,17 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/post.css">
         <title>投稿一覧</title>
     </head>
     <body>
+        <!-- バナー表示 -->
+        <div class="header">
+            <a class="banner_title">お散歩</a>
+            <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+        </div>
+        <!-- バナーココまで -->
         <h1>投稿一覧</h1>
         <div>
             <?php
@@ -39,8 +47,8 @@
                     echo '<div class="post">';
                     echo '<form action="post_detail.php?id=',$post_id,'" method="post">'; /*form*/
                     echo '<img src="' ,$row['image_file'],'" class="post_img">'; /*画像*/
-                    echo '<a class="post_name">',$row['post_name'],'</a>'; /*投稿名*/
-                    echo '<a class="date">',$row['date'],'</a>'; /*日付*/
+                    echo '<a class="date">',$row['date'],'</a><br>'; /*日付*/
+                    echo '<a class="post_name">',$row['post_name'],'</a><br>'; /*投稿名*/
                     echo '<a class="address">',$row['post_address'],'</a>';
                     echo '<button type="submit" class="detail">詳細</button>';
                     echo '</form>';
@@ -54,7 +62,7 @@
         <a href="http://aso2001007.versus.jp/System4_Ver2.0/menu.php">メニューへ戻る</a>
 
         <?php
-        echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
+        echo '<a href="' . $_SERVER['HTTP_REFERER'] . 'class="back">前に戻る</a>';
         ?>
 
     </body>
