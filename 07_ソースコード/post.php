@@ -68,20 +68,20 @@ EOF;
     <link rel="stylesheet" href="./css/post.css">
     <script src="./script/script.js"></script>
     </head>
-    <body>
-    <button type="submit" class="return" onclick="history.back()">←</button>
-    <div class="post_area">
+    <body class="body">
+    <button type="submit" id="return"　class="return" onclick="history.back()">←</button>
+    <div id="post_area" class="post_area">
     <form action="post.php" method="post" enctype="multipart/form-data">
-        <input required type="text" class="post_name" name="post_name" placeholder="タイトル"><br>
+        <input required type="text" id="post_name" class="post_name" name="post_name" placeholder="タイトル"><br>
         <div>
             <label>
-                <span class="file_label">
+                <span id="file_label" class="file_label">
                     写真を選択
                 </span>
-                <input required type="file" class="image_file" name="image_file" onchange="previewImage(this);">
+                <input required type="file" id="image_file" class="image_file" name="image_file" onchange="previewImage(this);">
             </label>
         </div>
-        <img id="preview" src="data:image/gif;base64,R01GODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:300px;max-height:250px;"><br>
+        <img id="preview" class="preview" src="data:image/gif;base64,R01GODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:300px;max-height:250px;"><br>
         <script>
             function previewImage(obj)
             {
@@ -92,13 +92,13 @@ EOF;
                 fileReader.readAsDataURL(obj.files[0]);
             }
         </script>
-        <button type="button" id="get-gps">現在地名取得</button><br>
-        <input type="text" name="address" id="address" value="" > <!--場所-->
-        <input type="hidden" name="lat" id="lat" value=""><!-- 緯度 -->
-        <input type="hidden" name="lon" id="lon" value=""><br><!-- 経度 -->
+        <button type="button" id="get-gps" class="get-gps">現在地名取得</button><br>
+        <input type="text" name="address" id="address" class="address" value="" > <!--場所-->
+        <input type="hidden" name="lat" id="lat" class="lat" value=""><!-- 緯度 -->
+        <input type="hidden" name="lon" id="lon" class="lon" value=""><br><!-- 経度 -->
 
-        <input type="text" class="comment" name="comment" placeholder="コメント" style="width: 300px;height: 200px;"><br>
-        <button type="submit" class="post" name="post">投稿</button>
+        <input type="text" id="comment" class="comment" name="comment" placeholder="コメント" style="width: 300px;height: 200px;"><br>
+        <button type="submit" id="post" class="post" name="post">投稿</button>
     </form>
     </div>
 </body>
