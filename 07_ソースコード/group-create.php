@@ -4,49 +4,80 @@ session_start();
 <?php
 $pdo = new PDO('mysql:dbname=LAA1290590-system4ver2; host=mysql203.phy.lolipop.lan',
         'LAA1290590','System4');
-$id = $_SESSION['member']['id'];
-//作成ボタンが押された場合実行
-if (isset($_POST['groupcreatesubmit'])){
-    $sql=$pdo->prepare('select group_room from `group` order by group_id asc');
-    $sql->execute();
-    $flg = false;
-    $roomflg = true;
-    //自動生成した部屋名とDBにある部屋名が一致しなかったら抜ける
-    while ($roomflg) {
+$pageflg = true;
+//グループのリーダーはグループ作成ができないようにする
+$check=$pdo->prepare('select group_id,group_leader from `group`');
+$check->execute();
+foreach ($check as $leadercheck){
+    if ($leadercheck['group_leader'] != 1 and $leadercheck['group_leader'] == $_SESSION['member']['id']){
+        $_SESSION['member']['group_id'] = $leadercheck['group_id'];
+        $pageflg = false;
+        http_response_code(301);
+        header("location:http://aso2001027.angry.jp/system4_ver2/group_post.php");
+        exit();
+    }
+}
+//グループに所属してる人はグループ作成ができないようにする
+$check2=$pdo->prepare('select group_id from member where member_id = ?');
+$check2->bindValue(1,$_SESSION['member']['id'],PDO::PARAM_INT);
+$check2->execute();
+foreach ($check2 as $joincheck){
+    if ($joincheck['group_id'] != 1){
+        $pageflg = false;
+        http_response_code(301);
+        header("location:http://aso2001027.angry.jp/system4_ver2/group_post.php");
+        exit();
+    }
+}
+if ($pageflg){
+    //作成ボタンが押された場合実行
+    if (isset($_POST['groupcreatesubmit'])){
+        $id = $_SESSION['member']['id'];
+        $sql=$pdo->prepare('select group_room from `group` order by group_id asc');
+        $sql->execute();
         $flg = false;
-        //自動生成した部屋名とDBにある部屋名が一致したら新しく部屋名を生成して比較しなおす
-        foreach ($sql as $row) {
-            if ($row['group_room'] == $_POST['grouproom']) {
-                echo '<script>', 'groupRoomCreate();', '</script>';
-                $flg = true;
+        $roomflg = true;
+        //自動生成したグループコードとDBにあるグループコードが一致しなかったら抜ける
+        while ($roomflg) {
+            $flg = false;
+            //自動生成したグループコードとDBにあるグループコードが一致したら新しくグループコードを生成して比較しなおす
+            foreach ($sql as $row) {
+                if ($row['group_room'] == $_POST['grouproom']) {
+                    echo '<script>', 'groupRoomCreate();', '</script>';
+                    $flg = true;
+                }
+            }
+            if ($flg == false) {
+                $roomflg = false;
             }
         }
-        if ($flg == false) {
-            $roomflg = false;
+        //作成したグループをDBに追加する
+        $sql=$pdo->prepare('insert into `group`(group_id,group_name,group_pass,group_image,group_room,group_leader) values(null,?,?,null,?,?)');
+        $sql->bindValue(1,$_POST['groupname'],PDO::PARAM_STR);
+        $sql->bindValue(2,$_POST['grouppassword'],PDO::PARAM_STR);
+        $sql->bindValue(3,$_POST['grouproom'],PDO::PARAM_STR);
+        $sql->bindValue(4,$id,PDO::PARAM_INT);
+        $sql->execute();
+        $_SESSION['member']['group_name'] = $_POST['groupname'];
+        $_SESSION['member']['group_pass'] = $_POST['grouppassword'];
+        $_SESSION['member']['room'] = $_POST['grouproom'];
+        $_SESSION['member']['leader'] = true;
+        //作成したグループのIDをセッションに保存する
+        $sql2=$pdo->prepare('select group_id from `group` where group_room = ?');
+        $sql2->bindValue(1,$_POST['grouproom'],PDO::PARAM_STR);
+        $sql2->execute();
+        $setgroup_id = '';
+        foreach ($sql2 as $row2){
+                $setgroup_id = $row2['group_id'];
         }
+        $_SESSION['member']['group_id'] = $setgroup_id;
+        $sql3=$pdo->prepare('update member set group_id = ? where member_id = ?');
+        $sql3->bindValue(1,$_SESSION['member']['group_id'],PDO::PARAM_INT);
+        $sql3->bindValue(2,$_SESSION['member']['id'],PDO::PARAM_INT);
+        $sql3->execute();
+        header('location:http://aso2001027.angry.jp/system4_ver2/group_post.php',true,301);
+        exit();
     }
-    //作成したグループをDBに追加する
-    $sql=$pdo->prepare('insert into `group`(group_id,group_name,group_pass,group_image,group_room,group_leader) values(null,?,?,null,?,?)');
-    $sql->bindValue(1,$_POST['groupname'],PDO::PARAM_STR);
-    $sql->bindValue(2,$_POST['grouppassword'],PDO::PARAM_STR);
-    $sql->bindValue(3,$_POST['grouproom'],PDO::PARAM_STR);
-    $sql->bindValue(4,$id,PDO::PARAM_INT);
-    $sql->execute();
-    $_SESSION['member'] = [
-        'group_name' => $_POST['groupname'],
-        'group_pass' => $_POST['grouppassword'],
-        'room' => $_POST['grouproom'],
-        'leader' => true];
-    //作成したグループのIDをセッションに保存する
-    $sql2=$pdo->prepare('select group_id from `group` where group_room = ?');
-    $sql2->bindValue(1,$_POST['grouproom'],PDO::PARAM_STR);
-    $sql2->execute();
-    foreach ($sql2 as $row2){
-        $_SESSION['member'] = [
-                'group_id' => $row2['group_id']];
-    }
-    header('location:http://aso2001027.angry.jp/system4_ver2/group_post.php',true,301);
-    exit();
 }
 ?>
 <!doctype html>
@@ -62,7 +93,11 @@ if (isset($_POST['groupcreatesubmit'])){
     <div class="box"></div>
 <form action="group-create.php" method="post">
 <h1 class="pagename">グループ作成</h1>
-    <div><button type="submit" class="backright"><img src="./img/back.png"></button></div>
+    <div><!--<button type="submit" class="backright" onclick="history.back(-1)">↩</button>-->
+        <?php
+        echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
+        ?>
+    </div>
 <h2>グループ名</h2>
 <input type="text" class="input" maxlength="15" name="groupname" placeholder="グループ名を入力"><br>
 <h2>パスワード</h2>
