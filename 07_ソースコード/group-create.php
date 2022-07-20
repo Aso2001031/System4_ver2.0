@@ -88,14 +88,25 @@ if ($pageflg){
     <title>group-create</title>
 </head>
 <body>
-<div class="background">
-    <div class="head">appname</div>
-    <div class="box"></div>
+<?php
+$id=$name=$mail=$password=$icon='';
+if (!empty($_SESSION['member'])) {
+    $id=$_SESSION['member']['id'];
+    $name=$_SESSION['member']['name'];
+    $mail=$_SESSION['member']['mail'];
+    $password=$_SESSION['member']['pass'];
+    $icon=$_SESSION['member']['icon'];
+}
+?>
+<div class="header">
+    <a class="banner_title">お散歩</a>
+    <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+</div>
 <form action="group-create.php" method="post">
 <h1 class="pagename">グループ作成</h1>
-    <div><!--<button type="submit" class="backright" onclick="history.back(-1)">↩</button>-->
+    <div><button type="submit" class="backright" onclick="history.back()">↩</button>
         <?php
-        echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
+        //echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
         ?>
     </div>
 <h2>グループ名</h2>
