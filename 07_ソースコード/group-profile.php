@@ -1,10 +1,10 @@
 <?php
 session_start();
-
 $pdo=new PDO('mysql:host=mysql203.phy.lolipop.lan;
       dbname=LAA1290590-system4ver2;charset=utf8',
     'LAA1290590',
     'System4');
+error_reporting(0);
 //グループ情報取得
 if (!isset($_POST['edit'])){
 $sql=$pdo->prepare('SELECT * FROM `group` where group_id = ?');
@@ -73,7 +73,25 @@ if ($_SESSION['member']['leader'] == false){
     <title>group-profile</title>
 </head>
 <body>
+<?php
+$id=$name=$mail=$password=$icon='';
+if (!empty($_SESSION['member'])) {
+    $id=$_SESSION['member']['id'];
+    $name=$_SESSION['member']['name'];
+    $mail=$_SESSION['member']['mail'];
+    $password=$_SESSION['member']['pass'];
+    $icon=$_SESSION['member']['icon'];
+}
+?>
+<div class="header">
+    <a class="banner_title">お散歩</a>
+    <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+</div>
 <h1>グループ情報</h1>
+<button type="submit" class="backright" onclick="history.back()">↩</button>
+<?php
+//echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
+?>
 <?php
 if ($_SESSION['member']['leader']){
     echo '<form action="group-profile.php" method="post">';
@@ -152,7 +170,7 @@ echo '<li>';
 //グループ管理者情報出力
 foreach ($leadershow as $lrow){
     $leaderid = $lrow['member_id'];
-    echo '<img src="',$imgurl,$lrow['member_icon'],'">';
+    echo '<img src="',$imgurl,$lrow['member_icon'],'" class="inside">';
     if ($_SESSION['member']['leader']){
         echo $lrow['member_id'];
     }
@@ -167,7 +185,7 @@ foreach ($show as $row) {
         if ($_SESSION['member']['leader']){
             echo '<form action="group-profile.php" name="kickForm" method="post">';
         }
-        echo '<img src="',$imgurl,$row['member_icon'],'">';
+        echo '<img src="',$imgurl,$row['member_icon'],'" class="inside">';
         if ($_SESSION['member']['leader']){
             echo $row['member_id'];
         }
