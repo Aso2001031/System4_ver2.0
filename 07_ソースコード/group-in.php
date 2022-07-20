@@ -75,11 +75,25 @@ if ($pageflg){
     <title>group-in</title>
 </head>
 <body>
+<?php
+$id=$name=$mail=$password=$icon='';
+if (!empty($_SESSION['member'])) {
+    $id=$_SESSION['member']['id'];
+    $name=$_SESSION['member']['name'];
+    $mail=$_SESSION['member']['mail'];
+    $password=$_SESSION['member']['pass'];
+    $icon=$_SESSION['member']['icon'];
+}
+?>
+<div class="header">
+    <a class="banner_title">お散歩</a>
+    <a class="member_icon" type="image" src="./<?php $icon?>" name="member_icon"></a>
+</div>
 <form action="group-in.php" method="post">
 <h1>入室</h1>
-<div><!--<button type="submit" class="back" onclick="history.back()">↩</button>-->
+<div><button type="submit" class="back" onclick="history.back()">↩</button>
     <?php
-    echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
+    //echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">↩</a>';
     ?>
 </div>
 <h2>グループコード</h2>
