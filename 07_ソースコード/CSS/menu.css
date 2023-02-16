@@ -1,0 +1,184 @@
+body {
+    background-color: #F4F4F4;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.img {
+    width: 10%;
+    height: auto;
+}
+.header {
+    padding-top: 10px;
+    background-color: #2D6497;
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+}
+.banner_title {
+    margin-left: 10px;
+    color: #FFFFFF;
+    font-size: 32px;
+    font-family: "BIZ UD明朝 Medium";
+}
+.calender_banner {
+    justify-content: space-between;
+    background-color: #ECDAAB;
+    overflow: hidden;
+}
+.calender_banner_1 {
+    height: 50px;
+    float: left;
+}
+.calender_banner_2 {
+    margin-left: 70%;
+    height: 50px;
+}
+.calender_banner_2 img {
+    height: 50px;
+}
+.calender_area {
+    background-color: #FAEFCA;
+
+}
+.calender {
+    width: 100%;
+    border-collapse: collapse;
+    color: #D8D8D8;
+    border: solid 1px;
+}
+.calender_1 {
+    font-size: 28px;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.calender_2 {
+    font-size: 28px;
+    color: black;
+    text-decoration: none;
+}
+.calender_3 {
+    font-size: 28px;
+    text-decoration: none;
+}
+.calender_text {
+    color: #4F4F4F;
+}
+.calender_table_tr {
+    border: solid 1px;
+}
+.calender_day {
+    width: 20%;
+    text-align: center;
+    border: solid 1px;
+}
+.calender_schedule {
+    border: solid 1px;
+}
+.button_area {
+    background-color: #B9DEC6;
+    width: 100%;
+    height: 20%;
+}
+.button_table {
+    width: 100%;
+    border-collapse: collapse;
+    border: solid 1px;
+    margin: auto;
+}
+.button_area_tr {
+    border: solid 1px;
+}
+.button_area_td {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    border: solid 1px;
+}
+.calender_box {
+    font-size: 24px;
+    background-color: #FAEFCA;
+    border: none;
+}
+.calender_edit_area_1 {
+    background-color: #ECDAAB;
+    text-align: center;
+    padding-top: 150px;
+}
+.calender_edit_area_2 {
+    padding: 20px;
+    margin: auto;
+    width: 70%;
+    height: 50%;
+    text-align: center;
+    background-color: #FAEFCA;
+    border: solid 2px #333333;
+}
+.calender_edit_title {
+    font-size: 28px;
+}
+.calender_edit_box {
+    width: 70%;
+    margin: 10px;
+    font-size: 24px;
+}
+.return_button {
+    width: 15%;
+    height: 30px;
+    font-size: 18px;
+    background-color: #808DFF;
+    color: #FEFCFC;
+    border-color: #000000;
+}
+.return_button:hover {
+    background: #1d49aa;
+}
+.return_button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+}
+.calender_edit_button {
+    width: 15%;
+    height: 30px;
+    font-size: 18px;
+    background-color: #808DFF;
+    color: #FEFCFC;
+    border-color: #000000;
+}
+.calender_edit_button:hover {
+    background: #1d49aa;
+}
+.calender_edit_button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+}
+.calender_edit_button_float {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 15%;
+    border-color: #000000;
+    border-radius: 5px;
+}
+.calender_edit_button_float:hover {
+    background: #808DFF;
+}
+.calender_edit_button_float:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+}
+.calender_month {
+    font-size: 24px;
+}
+.calender_week {
+    font-size: 24px;
+}
+.button_area_td :hover {
+    background-color: #49CEAE;
+}
+@media screen and (min-width: 481px) {
+    /* 481px以上に適用されるCSS（タブレット用） */
+}
+@media screen and (min-width: 960px) {
+    /* 960px以上に適用されるCSS（PC用） */
+}

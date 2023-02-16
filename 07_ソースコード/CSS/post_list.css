@@ -1,0 +1,92 @@
+body {
+    background-color: #F4F4F4;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    padding-top: 10px;
+    background-color: #2D6497;
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+}
+body{
+    background-color: #F4F4F4;
+}
+.banner_title {
+    margin-left: 10px;
+    color: #FFFFFF;
+    font-size: 32px;
+    font-family: "BIZ UD明朝 Medium";
+}
+.title {
+    margin-left: 10%;
+    font-size: 36px;
+}
+.return {
+    width: 10%;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-right: 10%;
+    float: right;
+    border-radius: 5px;
+}
+.post_area {
+    margin: auto;
+    width: 80%;
+    height: 90%;
+}
+.post_list_area {
+    margin: 5px;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #FFFFFF;
+    border: solid 2px #333333;
+    border-radius: 0.75em;
+}
+.post_list_area img {
+    height: 170px;
+}
+.date {
+    font-size: 24px;
+}
+.post_name {
+    font-size: 36px;
+    text-overflow: ellipsis;
+}
+.post_name_box {
+    border: none;
+    width: 100%;
+    font-size: 36px;
+}
+.address_box {
+    border: none;
+    width: 100%;
+    font-size: 24px;
+}
+.detail {
+    vertical-align: middle;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    font-size: 20px;
+    width: 20%;
+    height: 30px;
+    border-color: #000000;
+    border-radius: 5px;
+    -webkit-text-stroke: 0.1px #000000;
+    text-stroke: 0.1px #000000;
+}
+.detail:hover {
+    background-color: #a0a0a0;
+}
+.footer {
+    height: 50px;
+}
+@media screen and (min-width: 481px) {
+    /* 481px以上に適用されるCSS（タブレット用） */
+}
+@media screen and (min-width: 960px) {
+    /* 960px以上に適用されるCSS（PC用） */
+}
