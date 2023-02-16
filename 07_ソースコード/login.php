@@ -67,11 +67,9 @@ if(isset($_POST["login"])){
     <div class="login-form">
         <form action="login.php" method="post">
             <a class="log_text">メールアドレス</a><br>
-            <input type="text" name="mail"class="log_box"><br>
+            <input type="text" name="mail"class="log_box" value="sample@ac.asojuku.ac"><br>
             <a class="log_text">パスワード</a><br>
-            <input type="password" name="pass" class="log_box"><br>
-
-
+            <input type="password" name="pass" class="log_box" value="SAMple2022"><br>
             <button type="submit" name="login" class="login_button">ログイン</button><br>
         </form>
         
